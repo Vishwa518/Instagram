@@ -9,11 +9,37 @@ import {
   Text,
   TextInput,
   Pressable,
+  Platform,
+  Animated,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Images} from '../../constants/Images';
+import SmallButton from '../../instaComponents/Button/SmallButton';
 import BottomModal from '../../instaComponents/Modal/BottomModal';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
+
+const dropDownList = [
+  {
+    id: 1,
+    name: 'Post',
+    image: Images.heart,
+  },
+  {
+    id: 2,
+    name: 'Story',
+    image: Images.share,
+  },
+  {
+    id: 3,
+    name: 'Reel',
+    image: Images.instaReels,
+  },
+  {
+    id: 4,
+    name: 'Live',
+    image: Images.redHeart,
+  },
+];
 
 const data = [
   {
@@ -184,7 +210,7 @@ const shareData = [
     profileImage: Images.post5,
   },
 ];
-const PostCardItems = ({bgColor, tintColor}) => {
+const PostCardItems = ({bgColor, tintColor, showDropDown}) => {
   const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState('');
@@ -229,7 +255,9 @@ const PostCardItems = ({bgColor, tintColor}) => {
     return (
       <View>
         <View style={styles.cardMainView}>
-          <TouchableOpacity style={styles.headerContent}>
+          <TouchableOpacity
+            style={styles.headerContent}
+            onPress={() => navigation.navigate('UserProfileScreen')}>
             <Image source={item.profileImage} style={styles.profileImage} />
             <Text style={styles.accountName(tintColor)}>
               {item.accountName}
@@ -361,11 +389,13 @@ const PostCardItems = ({bgColor, tintColor}) => {
               {item.accountName}
             </Text>
           </View>
-          <TouchableOpacity
+          <SmallButton
             onPress={() => setIsShaePressed(false)}
-            style={styles.shareModalButton}>
-            <Text style={styles.shareModalButtonText(bgColor)}>Send</Text>
-          </TouchableOpacity>
+            text="Send"
+            newStyle={styles.shareModalButton}
+            backgroundColor={'#007FFF'}
+            tintColor={tintColor}
+          />
         </View>
       </>
     );
@@ -391,6 +421,28 @@ const PostCardItems = ({bgColor, tintColor}) => {
     );
   };
 
+  const DropDown = () => {
+    return (
+      <Animated.View style={styles.dropDownViewStyle(tintColor)}>
+        <FlatList
+          data={dropDownList}
+          renderItem={renderDropDownItem}
+          showsVerticalScrollIndicator={false}
+          scrollEnabled={false}
+        />
+      </Animated.View>
+    );
+  };
+
+  const renderDropDownItem = ({item}) => {
+    return (
+      <TouchableOpacity style={styles.dropDownStyle}>
+        <Text style={styles.dropDownText(tintColor)}>{item.name}</Text>
+        <Image source={item.image} style={styles.dropDownImage(tintColor)} />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -403,7 +455,7 @@ const PostCardItems = ({bgColor, tintColor}) => {
       <BottomModal
         onClose={() => setVisible(false)}
         visible={visible}
-        minHeight="40%">
+        minHeight={Platform.OS === 'ios' ? '40%' : '44%'}>
         <FlatList
           horizontal
           scrollEnabled={imageList.length > 3}
@@ -422,6 +474,7 @@ const PostCardItems = ({bgColor, tintColor}) => {
         />
       </BottomModal>
       {isSharePressed && <SharePostModal />}
+      {showDropDown && <DropDown />}
     </View>
   );
 };
@@ -488,17 +541,17 @@ const styles = StyleSheet.create({
     width: '30%',
   },
   commonImageStyle: tintColor => ({
-    width: 26,
-    height: 26,
+    width: 25,
+    height: 25,
     tintColor: tintColor,
   }),
   commonImageStyle2: tintColor => ({
-    width: 42,
-    height: 42,
+    width: 40,
+    height: 40,
     tintColor: tintColor,
   }),
   commonImageStyle3: tintColor => ({
-    width: 22,
+    width: 20,
     height: 22,
     tintColor: tintColor,
   }),
@@ -570,15 +623,12 @@ const styles = StyleSheet.create({
     marginLeft: 25,
   }),
   shareModalButton: {
-    backgroundColor: '#007FFF',
-    width: 70,
+    width: '20%',
     height: 30,
-    borderRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderRadius: 5,
     marginRight: 10,
   },
-  shareModalButtonText: bgColor =>({
+  shareModalButtonText: bgColor => ({
     fontSize: 12,
     color: bgColor,
     fontWeight: '500',
@@ -596,9 +646,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
   }),
   renderImageList: (tintColor, item) => ({
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 58,
+    height: 58,
+    borderRadius: 29,
     borderWidth: 1,
     borderColor: item.id === 3 ? '#E97451' : tintColor,
     alignItems: 'center',
@@ -613,6 +663,30 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     color: item.id === 3 ? '#D22B2B' : tintColor,
   }),
+  dropDownViewStyle: tintColor => ({
+    height: 165,
+    width: 125,
+    backgroundColor: tintColor === '#fff' ? '#343434' : '#fff',
+    position: 'absolute',
+    top: -100,
+    right: 1,
+    borderRadius: 5,
+  }),
+  dropDownStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#353835',
+  },
+  dropDownText: tintColor => ({
+    fontSize: 16,
+    color: tintColor,
+    letterSpacing: 0.4,
+    fontWeight: '500',
+  }),
+  dropDownImage: tintColor => ({width: 23, height: 23, tintColor}),
 });
 
 export default PostCardItems;

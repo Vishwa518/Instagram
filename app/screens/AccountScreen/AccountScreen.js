@@ -10,12 +10,15 @@ import {
   Pressable,
   ScrollView,
   FlatList,
+  Platform,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
-import {constants} from '../constants/constants';
-import {Images} from '../constants/Images';
-import BottomModal from '../instaComponents/Modal/BottomModal';
+import {constants} from '../../constants/constants';
+import {Images} from '../../constants/Images';
+import SmallButton from '../../instaComponents/Button/SmallButton';
+import ProfileComponet from '../../instaComponents/Header/ProfileComponet';
+import BottomModal from '../../instaComponents/Modal/BottomModal';
 
 const data = [
   {
@@ -140,7 +143,7 @@ const AccountScreen = () => {
 
   const renderBurgerMenuItem = ({item}) => {
     return (
-      <TouchableOpacity
+      <Pressable
         onPress={() => handleScreeenNaavigation(item.id)}
         style={styles.renderBurgerMenuItem}>
         <FastImage
@@ -149,20 +152,20 @@ const AccountScreen = () => {
           style={styles.renderBurgerMenuItemImage}
         />
         <Text style={styles.renderBurgerMenuText(tintColor)}>{item.name}</Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   const renderCreateStory = ({item}) => {
     return (
-      <TouchableOpacity style={styles.createStory}>
+      <Pressable style={styles.createStory}>
         <FastImage
           source={item.image}
           tintColor={tintColor}
           style={styles.createStoryImage}
         />
         <Text style={styles.createStoryText(tintColor)}>{item.name}</Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
   const renderProfileList = ({item}) => {
@@ -207,39 +210,26 @@ const AccountScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.subHeaderView}>
-        <TouchableOpacity>
-          <Image source={Images.post1} style={styles.profileIcon} />
-        </TouchableOpacity>
-        <View style={styles.tetWrapper}>
-          <Pressable style={styles.pressableText}>
-            <Text style={styles.commonText(tintColor)}>1</Text>
-            <Text style={styles.commonText(tintColor)}>Post</Text>
-          </Pressable>
-          <Pressable style={styles.pressableText}>
-            <Text style={styles.commonText(tintColor)}>214</Text>
-            <Text style={styles.commonText(tintColor)}>Followers</Text>
-          </Pressable>
-          <Pressable style={styles.pressableText}>
-            <Text style={styles.commonText(tintColor)}>284</Text>
-            <Text style={styles.commonText(tintColor)}>Following</Text>
-          </Pressable>
-        </View>
-      </View>
-      <View style={{marginHorizontal: 10}}>
-        <Text style={styles.commonText(tintColor)}>Vishwa S</Text>
-        <Text style={styles.commonText(tintColor)}>Comments</Text>
-      </View>
+      <ProfileComponet
+        avatar={Images.post1}
+        noOfPost={1}
+        noOfFollowers={214}
+        noOfFollowing={284}
+        tintColor={tintColor}
+        userName={'Vishwa S'}
+        comments={'Comments'}
+      />
       <View style={styles.editButtonView}>
-        <TouchableOpacity style={styles.buttonOne(tintColor)}>
-          <Text style={styles.commonText(tintColor)}>Edit Profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonTwo(tintColor)}>
-          <Image
-            source={Images.addUserIcon}
-            style={styles.headerImage(tintColor)}
-          />
-        </TouchableOpacity>
+        <SmallButton
+          text="Edit Profile"
+          newStyle={{borderWidth: 1, width: '87%', height: 40}}
+          tintColor={tintColor}
+        />
+        <SmallButton
+          image={Images.addUserIcon}
+          newStyle={{borderWidth: 1, width: '10%', height: 40}}
+          newImageStyle={styles.newImageStyle(tintColor)}
+        />
       </View>
       <View style={{justifyContent: 'space-evenly'}}>
         <FlatList
@@ -300,6 +290,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 10,
     alignItems: 'center',
+    marginTop: Platform.OS === 'android' ? 5 : 0,
   },
   headerTouchable: {
     flexDirection: 'row',
@@ -316,24 +307,9 @@ const styles = StyleSheet.create({
   headerView2: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '30%',
+    width: '26%',
   },
-  headerImage2: tintColor => ({width: 26, height: 26, tintColor: tintColor}),
-  subHeaderView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 10,
-    alignItems: 'center',
-    marginVertical: 15,
-  },
-  profileIcon: {width: 90, height: 90, borderRadius: 45},
-  tetWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '65%',
-  },
-  pressableText: {alignItems: 'center', justifyContent: 'center'},
+  headerImage2: tintColor => ({width: 24, height: 24, tintColor: tintColor}),
   commonText: tintColor => ({
     fontSize: 16,
     color: tintColor,
@@ -346,24 +322,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 10,
   },
-  buttonOne: tintColor => ({
-    width: '87%',
-    height: 40,
-    borderColor: tintColor,
-    borderWidth: 1,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
-  buttonTwo: tintColor => ({
-    width: '10%',
-    height: 40,
-    borderColor: tintColor,
-    borderWidth: 1,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
+  newImageStyle: tintColor => ({width: 20, height: 20, tintColor}),
   flatListImage: tintColor => ({width: 20, height: 20, tintColor: tintColor}),
   flatListTouchable: (selectedTab, item, tintColor) => ({
     width: 195,
@@ -393,15 +352,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  renderBurgerMenuItemImage: {width: 25, height: 25, marginRight: 15},
-  renderBurgerMenuText: tintColor => ({fontSize: 18, color: tintColor, letterSpacing: 0.3}),
+  renderBurgerMenuItemImage: {width: 24, height: 24, marginRight: 15},
+  renderBurgerMenuText: tintColor => ({
+    fontSize: 18,
+    color: tintColor,
+    letterSpacing: 0.3,
+  }),
   createStory: {
-    paddingVertical: 14,
+    paddingVertical: 12,
     paddingLeft: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  createStoryImage: {width: 25, height: 25, marginRight: 15},
+  createStoryImage: {width: 24, height: 24, marginRight: 15},
   createStoryText: tintColor => ({
     fontSize: 18,
     color: tintColor,

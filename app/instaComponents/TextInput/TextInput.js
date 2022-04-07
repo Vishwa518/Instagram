@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   }),
   textInputStyle: tintColor => ({
-    height: 40,
+    height: 38,
     color: tintColor,
     paddingLeft: 14,
     letterSpacing: 0.4,

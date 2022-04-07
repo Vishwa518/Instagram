@@ -9,6 +9,8 @@ import {
   View,
   SafeAreaView,
   ScrollView,
+  Pressable,
+  Platform,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {Images} from '../../constants/Images';
@@ -75,13 +77,13 @@ const SettingScreen = () => {
 
   const renderItem = item => {
     return (
-      <TouchableOpacity
+      <Pressable
         key={item.id}
         onPress={() => item.id === 9 && navigation.navigate('ThemeScreen')}
         style={styles.renderItem}>
         <Image source={item.image} style={styles.renderItemImage(tintColor)} />
         <Text style={styles.renderItemText(tintColor)}>{item.name}</Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -108,10 +110,10 @@ const SettingScreen = () => {
         placeholder={'Search'}
         viewWrapperStyle={styles.ViewWrapper(tintColor)}
       />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {data.map(item => renderItem(item))}
         <View style={styles.accountView}>
-          <TouchableOpacity>
+          <Pressable>
             <Text style={styles.accountViewText}>Account Center</Text>
             <Text style={styles.accountViewText2(tintColor)}>
               control settings for connected experiences across
@@ -119,18 +121,18 @@ const SettingScreen = () => {
             <Text style={styles.accountViewText2(tintColor)}>
               Instagram, the FB app and Messenger.
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View style={styles.accountView2}>
-          <TouchableOpacity>
+          <Pressable>
             <Text style={styles.accountViewText3(tintColor)}>Logins</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
+          </Pressable>
+          <Pressable>
             <Text style={styles.accountViewText4}>Add account</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
+          </Pressable>
+          <Pressable>
             <Text style={styles.accountViewText5}>Log out</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -159,7 +161,11 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     paddingVertical: 10,
   },
-  renderItemImage: tintColor => ({width: 24, height: 24, tintColor}),
+  renderItemImage: tintColor => ({
+    width: Platform.OS === 'ios' ? 24 : 22,
+    height: Platform.OS === 'ios' ? 24 : 22,
+    tintColor,
+  }),
   renderItemText: tintColor => ({
     fontSize: 16,
     letterSpacing: 0.3,

@@ -13,10 +13,10 @@ import {Image, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Images} from './app/constants/Images';
 import StackNavigation from './app/navigation/StackNavigation';
-import AccountScreen from './app/screens/AccountScreen';
+import AccountScreen from './app/screens/AccountScreen/AccountScreen';
 import Activity from './app/screens/Activity';
 import ReelsFeed from './app/screens/ReelsFeed';
-import SearchFeeds from './app/screens/SearchFeeds';
+import SearchFeeds from './app/screens/Search/SearchFeeds';
 
 const Tab = createBottomTabNavigator();
 const App = () => {
@@ -90,7 +90,10 @@ const App = () => {
           component={AccountScreen}
           options={{
             tabBarIcon: ({color, size}) => (
-              <Image source={Images.name2} style={styles.imageStyle2(color)} />
+              <Image
+                source={Images.name2}
+                style={styles.imageStyle2(size, color)}
+              />
             ),
           }}
         />
@@ -101,14 +104,14 @@ const App = () => {
 
 const styles = StyleSheet.create({
   imageStyle: (size, color) => ({
-    width: size + 3,
-    height: size + 3,
+    width: size,
+    height: size,
     tintColor: color,
   }),
-  imageStyle2: color => ({
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+  imageStyle2: (size, color) => ({
+    width: size,
+    height: size,
+    borderRadius: size / 2,
     borderWidth: 1,
     borderColor: color,
     tintColor: color,

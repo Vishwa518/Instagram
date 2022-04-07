@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 10,
     alignItems: 'center',
+    marginTop: 5,
   },
   imageRapperView: {
     flexDirection: 'row',
@@ -51,12 +52,12 @@ const styles = StyleSheet.create({
     width: '20%',
   },
   imageStyle: {
-    width: 25,
-    height: 25,
+    width: 24,
+    height: 24,
   },
   igLogo: tintColor => ({
     width: 120,
-    height: 40,
+    height: 38,
     tintColor,
   }),
 });

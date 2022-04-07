@@ -4,7 +4,7 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import Header from './Header';
 import PostCardItems from './PostCardItems';
-import StatusBar from './StatusBar';
+import StoryScreen from './StoryScreen';
 
 const Home = () => {
   const selector = useSelector(state => state);
@@ -22,12 +22,12 @@ const Home = () => {
         showDropDown={showDropDown}
         setShowDropDown={setShowDropDown}
       />
-      <StatusBar
+      <StoryScreen bgColor={bgColor} tintColor={tintColor} />
+      <PostCardItems
         bgColor={bgColor}
         tintColor={tintColor}
         showDropDown={showDropDown}
       />
-      <PostCardItems bgColor={bgColor} tintColor={tintColor} />
     </SafeAreaView>
   );
 };

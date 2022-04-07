@@ -6,6 +6,8 @@ import Communication from '../screens/Home/Communication';
 import SettingScreen from '../screens/AccountScreen/SettingScreen';
 import Theme from '../screens/AccountScreen/Theme';
 import CommentScreen from '../screens/Home/CommentScreen';
+import StoryScreen from '../screens/Home/StoryScreen';
+import UserProfileScreen from '../screens/AccountScreen/UserProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +25,8 @@ const StackNavigation = () => {
       <Stack.Screen name="SettingScreen" component={SettingScreen} />
       <Stack.Screen name="ThemeScreen" component={Theme} />
       <Stack.Screen name="CommentScreen" component={CommentScreen} />
+      <Stack.Screen name="StoryScreen" component={StoryScreen} />
+      <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} />
     </Stack.Navigator>
   );
 };

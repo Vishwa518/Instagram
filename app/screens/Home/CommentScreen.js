@@ -39,7 +39,13 @@ const CommentScreen = () => {
         Left={() => (
           <BackIcon nav={() => navigation.goBack()} color={tintColor} />
         )}
-        Center={() => <TitleView title={'Comments'} color={tintColor} />}
+        Center={() => (
+          <TitleView
+            title={'Comments'}
+            color={tintColor}
+            NewStyle={{textAlign: 'center'}}
+          />
+        )}
         Right={() => (
           <ButtonGroup color={tintColor} isShare={false} image={Images.share} />
         )}

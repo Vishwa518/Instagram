@@ -1,11 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, ImageBackground} from 'react-native';
+import {SafeAreaView, StyleSheet, View, ImageBackground} from 'react-native';
 import {SectionGrid} from 'react-native-super-grid';
 import {useSelector} from 'react-redux';
-import {Images} from '../constants/Images';
-import CussomTextInput from '../instaComponents/TextInput/TextInput';
+import {Images} from '../../constants/Images';
+import HeaderComponent from '../../instaComponents/Header/Header';
+import {BackIcon} from '../../instaComponents/Header/HeaderComponents';
+import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 
 const SearchFeeds = () => {
+  const navigation = useNavigation()
   const selector = useSelector(state => state);
   bgColor = selector.color.color;
   tintColor = selector.color.tintColor;
@@ -74,13 +78,16 @@ const SearchFeeds = () => {
   ]);
   return (
     <SafeAreaView style={styles.container(bgColor)}>
-      <CussomTextInput
-        image={Images.search}
-        value={value}
-        handleChange={text => setValue(text)}
-        placeholder={'Search'}
-        viewWrapperStyle={styles.ViewWrapper(tintColor)}
-      />
+      <View style={styles.viewWrapperStyle}>
+        <BackIcon nav={() => navigation.goBack()} color={tintColor} />
+        <CussomTextInput
+          image={Images.search}
+          value={value}
+          handleChange={text => setValue(text)}
+          placeholder={'Search'}
+          viewWrapperStyle={styles.ViewWrapper(tintColor)}
+        />
+      </View>
       <SectionGrid
         itemDimension={90}
         showsVerticalScrollIndicator={false}
@@ -115,6 +122,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: bgColor,
   }),
+  viewWrapperStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   ViewWrapper: tintColor => ({
     flexDirection: 'row',
     alignItems: 'center',
@@ -123,7 +135,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1,
     borderColor: tintColor,
-    marginVertical: 2,
+    marginTop: 3,
+    width: '80%',
   }),
   gridView: {
     marginTop: 10,

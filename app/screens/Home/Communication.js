@@ -7,6 +7,7 @@ import {
   View,
   Text,
   FlatList,
+  Platform,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
@@ -99,7 +100,7 @@ const Communication = () => {
     return (
       <TouchableOpacity
         onPress={() => setSelectedTab(item.id)}
-        style={styles.renderItemStyle(selectedTab, item,tintColor)}>
+        style={styles.renderItemStyle(selectedTab, item, tintColor)}>
         <Text style={styles.renderItemText(selectedTab, item, tintColor)}>
           {item.name}
         </Text>
@@ -119,7 +120,9 @@ const Communication = () => {
             <Text style={styles.renderCardItemText(tintColor)}>
               {item.accountName}
             </Text>
-            <Text style={styles.renderCardItemText2(tintColor)}>{'Active Yestarday'}</Text>
+            <Text style={styles.renderCardItemText2(tintColor)}>
+              {'Active Yestarday'}
+            </Text>
           </View>
         </View>
         <FastImage
@@ -137,8 +140,15 @@ const Communication = () => {
         Left={() => (
           <BackIcon nav={() => navigation.goBack()} color={tintColor} />
         )}
-        Center={() => <TitleView title={'vishwa_b_s'} color={tintColor} />}
+        Center={() => (
+          <TitleView
+            title={'vishwa_b_s'}
+            color={tintColor}
+            NewStyle={{textAlign: 'center'}}
+          />
+        )}
         Right={() => <ButtonGroup color={tintColor} />}
+        NewStyle={{marginHorizontal: 10}}
       />
       <View>
         <FlatList
@@ -222,7 +232,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 5,
   },
-  renderCardItemImage: {width: 60, height: 60, borderRadius: 30},
+  renderCardItemImage: {
+    width: Platform.OS === 'ios' ? 60 : 58,
+    height: Platform.OS === 'ios' ? 60 : 58,
+    borderRadius: Platform.OS === 'ios' ? 30 : 29,
+  },
   renderCardItemText: tintColor => ({
     fontSize: 16,
     color: tintColor,
@@ -237,6 +251,6 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     paddingTop: 6,
   }),
-  renderCardItemImage2: {width: 26, height: 26, marginRight: 15},
+  renderCardItemImage2: {width: 26, height: 26, marginRight: 20},
 });
 export default Communication;

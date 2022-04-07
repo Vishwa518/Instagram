@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   Heading3A: color => ({
     fontSize: 20,
     color: color,
-    textAlign: 'center',
+    // textAlign: 'center',
     letterSpacing: 0.3,
   }),
 });
