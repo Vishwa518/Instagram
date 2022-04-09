@@ -19,6 +19,10 @@ const CussomTextInput = ({
   RightButton,
   viewWrapperStyle,
   searchIconStyle,
+  newInputStyle,
+  placeholderTextColor = tintColor,
+  isSecureTextEntry = false,
+  PasswordShowAndHide
 }) => {
   const selector = useSelector(state => state);
   bgColor = selector.color.color;
@@ -26,20 +30,24 @@ const CussomTextInput = ({
 
   return (
     <View style={[styles.ViewWrapper(tintColor), viewWrapperStyle]}>
-      <Image
-        style={[styles.searchIcon(tintColor), searchIconStyle]}
-        source={image}
-      />
+      {image && (
+        <Image
+          style={[styles.searchIcon(tintColor), searchIconStyle]}
+          source={image}
+        />
+      )}
       <TextInput
         value={value}
         autoCorrect={false}
         onChangeText={text => handleChange(text)}
         placeholder={placeholder}
-        placeholderTextColor={tintColor}
-        style={styles.textInputStyle(tintColor)}
+        placeholderTextColor={placeholderTextColor}
+        style={[styles.textInputStyle(tintColor), newInputStyle]}
         autoFocus={autoFocus}
+        secureTextEntry={isSecureTextEntry}
       />
       {isRightButton && <RightButton />}
+      {PasswordShowAndHide && <PasswordShowAndHide />}
     </View>
   );
 };

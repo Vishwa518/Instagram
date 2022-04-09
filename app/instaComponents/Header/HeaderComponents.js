@@ -1,7 +1,8 @@
 import React from 'react';
-import {Image, TouchableOpacity, Text, StyleSheet, View} from 'react-native';
+import {Image, Pressable, Text, StyleSheet, View} from 'react-native';
 import {Images} from '../../constants/Images';
 import PropTypes from 'prop-types';
+import IconButton from '../Button/IconButton';
 
 const styles = StyleSheet.create({
   Heading3A: color => ({
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
 });
 export const BackIcon = ({nav, onPress, color}) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => {
         if (onPress) onPress();
         else if (nav) nav();
@@ -22,7 +23,7 @@ export const BackIcon = ({nav, onPress, color}) => {
         source={Images.leftArrow}
         style={{tintColor: color, width: 26, height: 26}}
       />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -50,32 +51,25 @@ TitleView.defaultProps = {
   title: '',
 };
 
-export const ButtonGroup = ({color, isShare = true, image}) => {
+export const ButtonGroup = ({
+  color,
+  image1,
+  image2,
+  newImageStyle1,
+  newImageStyle2,
+}) => {
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      {isShare ? (
-        <>
-          <TouchableOpacity>
-            <Image
-              source={Images.videoCamera}
-              style={{width: 28, height: 28, tintColor: color}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={Images.editing}
-              style={{width: 23, height: 23, tintColor: color, marginTop: 1}}
-            />
-          </TouchableOpacity>
-        </>
-      ) : (
-        <TouchableOpacity style={{width: '100%', alignItems: 'flex-end'}}>
-          <Image
-            source={image}
-            style={{width: 23, height: 23, tintColor: color, marginTop: 1}}
-          />
-        </TouchableOpacity>
-      )}
+      <IconButton
+        image={image1}
+        tintColor={color}
+        newImageStyle={[{width: 26, height: 26}, newImageStyle1]}
+      />
+      <IconButton
+        image={image2}
+        tintColor={color}
+        newImageStyle={[{width: 22, height: 22}, newImageStyle2]}
+      />
     </View>
   );
 };

@@ -130,7 +130,7 @@ const SettingScreen = () => {
           <Pressable>
             <Text style={styles.accountViewText4}>Add account</Text>
           </Pressable>
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate('Login')}>
             <Text style={styles.accountViewText5}>Log out</Text>
           </Pressable>
         </View>

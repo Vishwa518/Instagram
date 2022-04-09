@@ -6,19 +6,23 @@
  * @flow strict-local
  */
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
-import {Images} from './app/constants/Images';
-import StackNavigation from './app/navigation/StackNavigation';
-import AccountScreen from './app/screens/AccountScreen/AccountScreen';
-import Activity from './app/screens/Activity';
-import ReelsFeed from './app/screens/ReelsFeed';
-import SearchFeeds from './app/screens/Search/SearchFeeds';
+import SettingScreen from './app/screens/AccountScreen/SettingScreen';
+import Theme from './app/screens/AccountScreen/Theme';
+import UserProfileScreen from './app/screens/AccountScreen/UserProfileScreen';
+import ChatScreen from './app/screens/Home/ChatScreen';
+import CommentScreen from './app/screens/Home/CommentScreen';
+import Communication from './app/screens/Home/Communication';
+import StoryScreen from './app/screens/Home/StoryScreen';
+import BottomTabNavigation from './app/navigation/BottomTabNavigation';
+import Login from './app/screens/Login';
+import SavedPosts from './app/screens/AccountScreen/SavedPosts';
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
 const App = () => {
   const selector = useSelector(state => state);
   bgColor = selector.color.color;
@@ -26,95 +30,25 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
+      <Stack.Navigator
+        initialRouteName="Login"
         screenOptions={{
-          tabBarActiveTintColor: bgColor === '#fff' ? '#FD1D1D' : '#fbad50',
-          tabBarInactiveTintColor: tintColor,
-          tabBarShowLabel: false,
+          cardStyle: {backgroundColor: bgColor},
           headerShown: false,
-          tabBarStyle: {
-            backgroundColor: bgColor,
-          },
         }}>
-        <Tab.Screen
-          name="Home"
-          component={StackNavigation}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                source={Images.home}
-                style={styles.imageStyle(size, color)}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="SearchFeeds"
-          component={SearchFeeds}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                source={Images.search}
-                style={styles.imageStyle(size, color)}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="ReelsFeed"
-          component={ReelsFeed}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                source={Images.instaReels}
-                style={styles.imageStyle(size, color)}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Activity"
-          component={Activity}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                source={Images.heart}
-                style={styles.imageStyle(size, color)}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="AccountScreen"
-          component={AccountScreen}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Image
-                source={Images.name2}
-                style={styles.imageStyle2(size, color)}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+        <Stack.Screen name="HomeScreen" component={BottomTabNavigation} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Communication" component={Communication} />
+        <Stack.Screen name="SettingScreen" component={SettingScreen} />
+        <Stack.Screen name="ThemeScreen" component={Theme} />
+        <Stack.Screen name="CommentScreen" component={CommentScreen} />
+        <Stack.Screen name="StoryScreen" component={StoryScreen} />
+        <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        <Stack.Screen name="SavedPosts" component={SavedPosts} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  imageStyle: (size, color) => ({
-    width: size,
-    height: size,
-    tintColor: color,
-  }),
-  imageStyle2: (size, color) => ({
-    width: size,
-    height: size,
-    borderRadius: size / 2,
-    borderWidth: 1,
-    borderColor: color,
-    tintColor: color,
-  }),
-});
 export default App;

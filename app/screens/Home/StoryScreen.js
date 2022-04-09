@@ -36,7 +36,7 @@ export default StoryScreen;
 const data = [
   {
     user_id: 1,
-    user_image: Images.post1,
+    user_image: Images.post3,
     user_name: 'Vishwa S',
     stories: [
       {

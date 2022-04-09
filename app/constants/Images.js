@@ -49,5 +49,12 @@ export const Images = {
   aboutIcon: require('../assets/info.png'),
   tickIcon: require('../assets/tick.png'),
   redHeart: require('../assets/redHeart.png'),
-  filledBookMark: require('../assets/filledBookmark.png')
+  filledBookMark: require('../assets/filledBookmark.png'),
+  facebook: require('../assets/facebook.png'),
+  eyeIcon: require('../assets/eye.png'),
+  eyeHide: require('../assets/eye-hide.png'),
+  phoneCall: require('../assets/phone-call.png'),
+  sticker: require('../assets/sticker.png'),
+  gallery: require('../assets/gallery.png'),
+  mic: require('../assets/mic.png'),
 };

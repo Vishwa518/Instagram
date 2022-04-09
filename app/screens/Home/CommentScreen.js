@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {Images} from '../../constants/Images';
+import IconButton from '../../instaComponents/Button/IconButton';
 import HeaderComponent from '../../instaComponents/Header/Header';
 import {
   BackIcon,
-  ButtonGroup,
   TitleView,
 } from '../../instaComponents/Header/HeaderComponents';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
@@ -47,7 +47,11 @@ const CommentScreen = () => {
           />
         )}
         Right={() => (
-          <ButtonGroup color={tintColor} isShare={false} image={Images.share} />
+          <IconButton
+            image={Images.share}
+            tintColor={tintColor}
+            newStyle={{alignItems: 'flex-end'}}
+          />
         )}
       />
       <KeyboardAvoidingView
@@ -83,8 +87,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     tintColor: '#fff',
   },
-  KeyboardAvoidingViewStyle: {position: 'absolute', bottom: 0, width: '100%'},
-  rightButton: {position: 'absolute', right: 10, top: 14},
+  KeyboardAvoidingViewStyle: {position: 'absolute', bottom: 10, width: '100%'},
+  rightButton: {position: 'absolute', right: 10, top: 10},
   rightButtonText: {
     color: '#007FFF',
     fontSize: 14,

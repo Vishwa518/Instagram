@@ -43,47 +43,47 @@ const data = [
   },
   {
     id: 2,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-1',
     profileImage: Images.post2,
   },
   {
     id: 3,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-2',
     profileImage: Images.post3,
   },
   {
     id: 4,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-3',
     profileImage: Images.post4,
   },
   {
     id: 5,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-4',
     profileImage: Images.post5,
   },
   {
     id: 6,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-5',
     profileImage: Images.post6,
   },
   {
     id: 7,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-6',
     profileImage: Images.post7,
   },
   {
     id: 8,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-7',
     profileImage: Images.post8,
   },
   {
     id: 9,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-8',
     profileImage: Images.post4,
   },
   {
     id: 10,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-9',
     profileImage: Images.post5,
   },
 ];
@@ -110,7 +110,9 @@ const Communication = () => {
 
   const renderCardItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.renderCardItemStyle}>
+      <TouchableOpacity
+        style={styles.renderCardItemStyle}
+        onPress={() => navigation.navigate('ChatScreen', {item})}>
         <View style={styles.renderCardItemView}>
           <FastImage
             source={item.profileImage}
@@ -147,7 +149,13 @@ const Communication = () => {
             NewStyle={{textAlign: 'center'}}
           />
         )}
-        Right={() => <ButtonGroup color={tintColor} />}
+        Right={() => (
+          <ButtonGroup
+            color={tintColor}
+            image1={Images.videoCamera}
+            image2={Images.editing}
+          />
+        )}
         NewStyle={{marginHorizontal: 10}}
       />
       <View>

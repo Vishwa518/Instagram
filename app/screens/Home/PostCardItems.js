@@ -44,8 +44,8 @@ const dropDownList = [
 const data = [
   {
     id: 1,
-    accountName: 'vishwa_b_s',
-    profileImage: Images.name1,
+    accountName: 'Test User-1',
+    profileImage: Images.post3,
     image: Images.post1,
     likes: 0,
     comments: 0,
@@ -53,8 +53,8 @@ const data = [
   },
   {
     id: 2,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-2',
+    profileImage: Images.post6,
     image: Images.post2,
     likes: 0,
     comments: 0,
@@ -62,8 +62,8 @@ const data = [
   },
   {
     id: 3,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-3',
+    profileImage: Images.post3,
     image: Images.post3,
     likes: 0,
     comments: 0,
@@ -71,8 +71,8 @@ const data = [
   },
   {
     id: 4,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-4',
+    profileImage: Images.post7,
     image: Images.post4,
     likes: 0,
     comments: 0,
@@ -80,8 +80,8 @@ const data = [
   },
   {
     id: 5,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-5',
+    profileImage: Images.post1,
     image: Images.post5,
     likes: 0,
     comments: 0,
@@ -89,8 +89,8 @@ const data = [
   },
   {
     id: 6,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-6',
+    profileImage: Images.post5,
     image: Images.post6,
     likes: 0,
     comments: 0,
@@ -98,8 +98,8 @@ const data = [
   },
   {
     id: 7,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-7',
+    profileImage: Images.post8,
     image: Images.post7,
     likes: 0,
     comments: 0,
@@ -107,8 +107,8 @@ const data = [
   },
   {
     id: 8,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-8',
+    profileImage: Images.post3,
     image: Images.post8,
     likes: 0,
     comments: 0,
@@ -116,8 +116,8 @@ const data = [
   },
   {
     id: 9,
-    accountName: 'Instagram Account',
-    profileImage: Images.name1,
+    accountName: 'Test User-9',
+    profileImage: Images.post1,
     image: Images.post5,
     likes: 0,
     comments: 0,
@@ -161,52 +161,52 @@ const textList = [
 const shareData = [
   {
     id: 1,
-    accountName: 'vishwa_b_s',
+    accountName: 'Test User-1',
     profileImage: Images.post1,
   },
   {
     id: 2,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-2',
     profileImage: Images.post2,
   },
   {
     id: 3,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-3',
     profileImage: Images.post3,
   },
   {
     id: 4,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-4',
     profileImage: Images.post4,
   },
   {
     id: 5,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-5',
     profileImage: Images.post5,
   },
   {
     id: 6,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-6',
     profileImage: Images.post6,
   },
   {
     id: 7,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-7',
     profileImage: Images.post7,
   },
   {
     id: 8,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-8',
     profileImage: Images.post8,
   },
   {
     id: 9,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-9',
     profileImage: Images.post4,
   },
   {
     id: 10,
-    accountName: 'Instagram Account',
+    accountName: 'Test User-10',
     profileImage: Images.post5,
   },
 ];
@@ -226,7 +226,6 @@ const PostCardItems = ({bgColor, tintColor, showDropDown}) => {
   const handleSharePost = item => {
     setIsShaePressed(true);
     setImageUrl(item.profileImage);
-    console.log('item.profileImage', item);
   };
 
   const handlePostLike = item => {
@@ -257,18 +256,18 @@ const PostCardItems = ({bgColor, tintColor, showDropDown}) => {
         <View style={styles.cardMainView}>
           <TouchableOpacity
             style={styles.headerContent}
-            onPress={() => navigation.navigate('UserProfileScreen')}>
+            onPress={() => navigation.navigate('UserProfileScreen', {item})}>
             <Image source={item.profileImage} style={styles.profileImage} />
             <Text style={styles.accountName(tintColor)}>
               {item.accountName}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setVisible(true)}>
+          <Pressable onPress={() => setVisible(true)}>
             <Image
               source={Images.vMenuIcon}
               style={styles.threeDots(tintColor)}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <Pressable onPress={() => handlePostLike(item)}>
           <Image source={item.image} style={styles.mainImage} />
@@ -286,19 +285,18 @@ const PostCardItems = ({bgColor, tintColor, showDropDown}) => {
                 ]}
               />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('CommentScreen')}>
+            <Pressable onPress={() => navigation.navigate('CommentScreen')}>
               <Image
                 source={Images.comments}
                 style={styles.commonImageStyle2(tintColor)}
               />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleSharePost(item)}>
+            </Pressable>
+            <Pressable onPress={() => handleSharePost(item)}>
               <Image
                 source={Images.share}
                 style={styles.commonImageStyle(tintColor)}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <TouchableOpacity onPress={() => handlePostSave(item)}>
             <Image
@@ -348,7 +346,6 @@ const PostCardItems = ({bgColor, tintColor, showDropDown}) => {
             <View style={styles.shareModalView}>
               <FastImage
                 source={imageUrl}
-                tintColor={tintColor}
                 style={styles.shareModalImage(tintColor)}
               />
               <TextInput

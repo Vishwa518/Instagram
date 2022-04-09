@@ -10,12 +10,17 @@ const SmallButton = ({
   onPress,
   newImageStyle,
   tintColor,
+  newTextStyle,
+  isDisabled = false,
 }) => {
   return (
     <TouchableOpacity
+      disabled={isDisabled}
       style={[styles.container(backgroundColor), newStyle]}
       onPress={onPress}>
-      {text && <Text style={styles.textStyle(tintColor)}>{text}</Text>}
+      {text && (
+        <Text style={[styles.textStyle(tintColor), newTextStyle]}>{text}</Text>
+      )}
       {image && <Image source={image} style={newImageStyle} />}
     </TouchableOpacity>
   );
@@ -41,10 +46,12 @@ export default SmallButton;
 
 SmallButton.propTypes = {
   text: PropTypes.string,
+  newTextStyle: PropTypes.any,
   image: PropTypes.any,
   newStyle: PropTypes.any,
   newImageStyle: PropTypes.any,
   backgroundColor: PropTypes.any,
   tintColor: PropTypes.any,
   onPress: PropTypes.func,
+  isDisabled: PropTypes.bool,
 };

@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,11 +11,13 @@ import {
   ScrollView,
   FlatList,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
 import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
+import IconButton from '../../instaComponents/Button/IconButton';
 import SmallButton from '../../instaComponents/Button/SmallButton';
 import ProfileComponet from '../../instaComponents/Header/ProfileComponet';
 import BottomModal from '../../instaComponents/Modal/BottomModal';
@@ -106,15 +108,16 @@ const profileDataList = [
   {
     id: 1,
     name: 'vishwa_b_s',
-    image: Images.name1,
+    image: Images.post4,
   },
   {
     id: 2,
     name: 'Add account',
-    image: Images.name2,
+    image: Images.post6,
   },
 ];
 const AccountScreen = () => {
+  const numColumns = 3;
   const navigation = useNavigation();
   const selector = useSelector(state => state);
   bgColor = selector.color.color;
@@ -123,12 +126,32 @@ const AccountScreen = () => {
   const [burgerMenuPressed, setBurgerMenuPressed] = useState(false);
   const [profileTextPressed, setProfileTextPressed] = useState(false);
   const [createStory, setCreateStory] = useState(false);
+  const [datas, setDatas] = useState([]);
+
+  useEffect(() => {
+    fetch('https://picsum.photos/v2/list')
+      .then(response => response.json())
+      .then(json => setDatas(json));
+  }, []);
 
   const handleScreeenNaavigation = id => {
+    setBurgerMenuPressed(false);
     if (id === 1) {
       navigation.navigate('SettingScreen');
+    } else if (id === 5) {
+      navigation.navigate('SavedPosts');
     }
-    setBurgerMenuPressed(false);
+  };
+
+  const renderUploadedPhotos = ({item}) => {
+    return (
+      <TouchableOpacity style={styles.uploadPhoto}>
+        <FastImage
+          source={{uri: item.download_url}}
+          style={styles.uploadImage}
+        />
+      </TouchableOpacity>
+    );
   };
 
   const renderItem = ({item}) => {
@@ -196,22 +219,20 @@ const AccountScreen = () => {
           />
         </TouchableOpacity>
         <View style={styles.headerView2}>
-          <TouchableOpacity onPress={() => setCreateStory(true)}>
-            <Image
-              source={Images.plus}
-              style={styles.headerImage2(tintColor)}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setBurgerMenuPressed(true)}>
-            <Image
-              source={Images.menuIcon}
-              style={styles.headerImage2(tintColor)}
-            />
-          </TouchableOpacity>
+          <IconButton
+            image={Images.plus}
+            tintColor={tintColor}
+            onPress={() => setCreateStory(true)}
+          />
+          <IconButton
+            image={Images.menuIcon}
+            tintColor={tintColor}
+            onPress={() => setBurgerMenuPressed(true)}
+          />
         </View>
       </View>
       <ProfileComponet
-        avatar={Images.post1}
+        avatar={Images.post3}
         noOfPost={1}
         noOfFollowers={214}
         noOfFollowing={284}
@@ -240,6 +261,19 @@ const AccountScreen = () => {
           contentContainerStyle={styles.contentContainerStyle}
         />
       </View>
+      {selectedTab === 1 &&
+        (data.length === 0 ? (
+          <ActivityIndicator size="large" color={tintColor} />
+        ) : (
+          <FlatList
+            data={datas}
+            renderItem={renderUploadedPhotos}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            numColumns={numColumns}
+            style={{marginTop: 5}}
+          />
+        ))}
       <BottomModal
         onClose={() => setBurgerMenuPressed(false)}
         visible={burgerMenuPressed}
@@ -382,7 +416,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: tintColor,
-    tintColor: tintColor,
     marginRight: 15,
   }),
   renderProfileListText: tintColor => ({
@@ -390,5 +423,13 @@ const styles = StyleSheet.create({
     color: tintColor,
     letterSpacing: 0.3,
   }),
+  uploadPhoto: {
+    flex: 1,
+    margin: 1,
+  },
+  uploadImage: {
+    height: 130,
+    width: '100%',
+  },
 });
 export default AccountScreen;

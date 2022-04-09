@@ -4,7 +4,6 @@ import {
 } from '../actionTypeConstant/appAction.constant';
 
 export const changeBgColor = color => {
-  console.log('color', color);
   return {
     type: CHANGE_BACKGROUND_COLOR,
     payload: color,

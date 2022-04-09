@@ -23,7 +23,11 @@ const ProfileComponet = ({
     <View>
       <View style={styles.subHeaderView}>
         <TouchableOpacity>
-          <Image source={avatar} style={styles.profileIcon} />
+          <Image
+            source={avatar}
+            style={styles.profileIcon}
+            resizeMode={'stretch'}
+          />
         </TouchableOpacity>
         <View style={styles.tetWrapper}>
           <Pressable style={styles.pressableText}>

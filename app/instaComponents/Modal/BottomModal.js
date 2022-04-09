@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 // import noop from "lodash/noop";
 import PropTypes from 'prop-types';
@@ -24,24 +25,28 @@ const BottomModal = ({
   bgColor = selector.color.color;
   tintColor = selector.color.tintColor;
   return (
-    <Modal
-      // animated
-      animationType="fade"
-      visible={visible}
-      transparent
-      onRequestClose={onClose}>
-      <View style={styles.overlay}>
-        <Animated.View style={styles.container(minHeight, bgColor)}>
-          <View style={styles.viewWrapp}>
-            <TouchableOpacity
-              style={styles.closeButton(tintColor)}
-              onPress={onClose}
-            />
+    <TouchableWithoutFeedback onPress={onClose}>
+      <Modal
+        // animated
+        // animationType="fade"
+        visible={visible}
+        transparent
+        onRequestClose={onClose}>
+        <TouchableWithoutFeedback onPress={onClose}>
+          <View style={styles.overlay}>
+            <Animated.View style={styles.container(minHeight, bgColor)}>
+              <View style={styles.viewWrapp}>
+                <TouchableOpacity
+                  style={styles.closeButton(tintColor)}
+                  onPress={onClose}
+                />
+              </View>
+              {children}
+            </Animated.View>
           </View>
-          {children}
-        </Animated.View>
-      </View>
-    </Modal>
+        </TouchableWithoutFeedback>
+      </Modal>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -73,7 +78,18 @@ const styles = StyleSheet.create({
     backgroundColor: tintColor,
     borderRadius: 2,
   }),
-  viewWrapp: {alignItems: 'center', paddingBottom: 5},
+  viewWrapp: {
+    alignItems: 'center',
+    paddingBottom: 5,
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
 });
 
 export default memo(BottomModal);

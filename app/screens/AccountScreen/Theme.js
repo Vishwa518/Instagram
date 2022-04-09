@@ -103,7 +103,7 @@ const Theme = () => {
           <TitleView
             title={'Theme'}
             color={tintColor}
-            NewStyle={{right: '2%'}}
+            NewStyle={{right: '2%', textAlign: 'center'}}
           />
         )}
         NewStyle={{left: 8}}

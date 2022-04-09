@@ -8,7 +8,6 @@ const initialState = {
   tintColor: '#fff', // #fff, #000
 };
 const changeBgReducer = (state = initialState, action) => {
-  console.log('action', action.payload);
   switch (action.type) {
     case CHANGE_BACKGROUND_COLOR:
       return {

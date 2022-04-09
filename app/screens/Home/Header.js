@@ -2,6 +2,8 @@ import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Images} from '../../constants/Images';
+import IconButton from '../../instaComponents/Button/IconButton';
+
 const Header = ({
   bgColor,
   tintColor,
@@ -19,20 +21,16 @@ const Header = ({
         />
       </View>
       <View style={styles.imageRapperView}>
-        <TouchableOpacity onPress={() => setShowDropDown(!showDropDown)}>
-          <FastImage
-            source={Images.plus}
-            tintColor={tintColor}
-            style={styles.imageStyle}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Communication')}>
-          <FastImage
-            source={Images.messenger}
-            tintColor={tintColor}
-            style={styles.imageStyle}
-          />
-        </TouchableOpacity>
+        <IconButton
+          image={Images.plus}
+          tintColor={tintColor}
+          onPress={() => setShowDropDown(!showDropDown)}
+        />
+        <IconButton
+          image={Images.messenger}
+          tintColor={tintColor}
+          onPress={() => navigation.navigate('Communication')}
+        />
       </View>
     </View>
   );
