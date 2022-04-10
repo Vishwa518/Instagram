@@ -10,16 +10,17 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
-import SettingScreen from './app/screens/AccountScreen/SettingScreen';
-import Theme from './app/screens/AccountScreen/Theme';
-import UserProfileScreen from './app/screens/AccountScreen/UserProfileScreen';
-import ChatScreen from './app/screens/Home/ChatScreen';
-import CommentScreen from './app/screens/Home/CommentScreen';
-import Communication from './app/screens/Home/Communication';
-import StoryScreen from './app/screens/Home/StoryScreen';
+import SettingScreen from './app/components/AccountScreen/SettingScreen';
+import Theme from './app/components/AccountScreen/Theme';
+import UserProfileScreen from './app/components/AccountScreen/UserProfileScreen';
+import ChatScreen from './app/components/Home/ChatScreen';
+import CommentScreen from './app/components/Home/CommentScreen';
+import Communication from './app/components/Home/Communication';
+import StoryScreen from './app/components/Home/StoryScreen';
 import BottomTabNavigation from './app/navigation/BottomTabNavigation';
-import Login from './app/screens/Login';
-import SavedPosts from './app/screens/AccountScreen/SavedPosts';
+import Login from './app/components/Login';
+import SavedPosts from './app/components/AccountScreen/SavedPosts';
+import AllPosts from './app/components/AccountScreen/AllPosts';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,7 @@ const App = () => {
         <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="SavedPosts" component={SavedPosts} />
+        <Stack.Screen name="AllPosts" component={AllPosts} />
       </Stack.Navigator>
     </NavigationContainer>
   );

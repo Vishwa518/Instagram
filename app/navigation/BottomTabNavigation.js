@@ -3,11 +3,11 @@ import {StyleSheet, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Images} from '../constants/Images';
-import Home from '../screens/Home/Home';
-import SearchFeeds from '../screens/Search/SearchFeeds';
-import ReelsFeed from '../screens/ReelsFeed';
-import Activity from '../screens/Activity';
-import AccountScreen from '../screens/AccountScreen/AccountScreen';
+import SearchFeeds from '../components/Search/SearchFeeds';
+import ReelsFeed from '../components/Reels/ReelsFeed';
+import Activity from '../components/Activity/Activity';
+import AccountScreen from '../components/AccountScreen/AccountScreen';
+import Home from '../components/Home/Home';
 
 const Tab = createBottomTabNavigator();
 

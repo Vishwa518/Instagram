@@ -25,14 +25,14 @@ const BottomModal = ({
   bgColor = selector.color.color;
   tintColor = selector.color.tintColor;
   return (
-    <TouchableWithoutFeedback onPress={onClose}>
+    // <TouchableWithoutFeedback onPress={onClose}>
       <Modal
         // animated
-        // animationType="fade"
+        animationType="fade"
         visible={visible}
         transparent
         onRequestClose={onClose}>
-        <TouchableWithoutFeedback onPress={onClose}>
+        {/* <TouchableWithoutFeedback onPress={onClose}> */}
           <View style={styles.overlay}>
             <Animated.View style={styles.container(minHeight, bgColor)}>
               <View style={styles.viewWrapp}>
@@ -44,9 +44,9 @@ const BottomModal = ({
               {children}
             </Animated.View>
           </View>
-        </TouchableWithoutFeedback>
+        {/* </TouchableWithoutFeedback> */}
       </Modal>
-    </TouchableWithoutFeedback>
+    // </TouchableWithoutFeedback>
   );
 };
 

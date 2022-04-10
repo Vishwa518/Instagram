@@ -10,9 +10,11 @@ const IconButton = ({
   onPress,
   newImageStyle,
   tintColor,
+  isDisabled = false,
 }) => {
   return (
     <Pressable
+      disabled={isDisabled}
       style={[styles.container(backgroundColor), newStyle]}
       onPress={onPress}>
       <FastImage
@@ -37,6 +39,7 @@ export default IconButton;
 
 IconButton.propTypes = {
   image: PropTypes.any,
+  isDisabled: PropTypes.bool,
   newStyle: PropTypes.any,
   newImageStyle: PropTypes.any,
   backgroundColor: PropTypes.any,
