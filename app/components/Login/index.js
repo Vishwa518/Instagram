@@ -8,21 +8,19 @@ import {
   StyleSheet,
   Pressable,
 } from 'react-native';
-import {useSelector} from 'react-redux';
 import {Images} from '../../constants/Images';
 import SmallButton from '../../instaComponents/Button/SmallButton';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 import {useTogglePasswordVisibility} from '../../hooks/useTogglePasswordVisibility';
+import {constants} from '../../constants/constants';
 
 const Login = () => {
-  const selector = useSelector(state => state);
   const navigation = useNavigation();
   const [value, setValue] = useState('');
   const [password, setPassword] = useState('');
   const {passwordVisibility, handlePasswordVisibility} =
     useTogglePasswordVisibility();
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const {bgColor, tintColor} = constants();
 
   const PasswordShowAndHide = () => {
     return (

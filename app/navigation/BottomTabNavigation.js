@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Image} from 'react-native';
-import {useSelector} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Images} from '../constants/Images';
 import SearchFeeds from '../components/Search/SearchFeeds';
@@ -8,12 +7,12 @@ import ReelsFeed from '../components/Reels/ReelsFeed';
 import Activity from '../components/Activity/Activity';
 import AccountScreen from '../components/AccountScreen/AccountScreen';
 import Home from '../components/Home/Home';
+import { constants } from '../constants/constants';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = () => {
-  const selector = useSelector(state => state);
-  bgColor = selector.color.color;
+  const {bgColor, tintColor} = constants();
   return (
     <Tab.Navigator
       initialRouteName="Home"

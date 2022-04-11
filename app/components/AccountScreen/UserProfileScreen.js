@@ -12,7 +12,7 @@ import {
   Text,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
+import { constants } from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
 import SmallButton from '../../instaComponents/Button/SmallButton';
@@ -77,14 +77,12 @@ const burgerMenuData = [
 const UserProfileScreen = ({route}) => {
   const numColumns = 3;
   const {accountName, profileImage} = route.params.item;
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState(1);
   const [data, setData] = useState([]);
   const [isThreeDotPressed, setIsThreeDotPressed] = useState(false);
   const [isFallowing, setIsFallowing] = useState(false);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   useEffect(() => {
     fetch('https://picsum.photos/v2/list')

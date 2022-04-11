@@ -6,12 +6,10 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  TouchableHighlight,
 } from 'react-native';
-// import noop from "lodash/noop";
 import PropTypes from 'prop-types';
-import {constants} from '../../constants/constants';
-import {useSelector} from 'react-redux';
+import { constants } from '../../constants/constants';
 
 const windowHeight = Dimensions.get('window').height;
 const BottomModal = ({
@@ -21,32 +19,31 @@ const BottomModal = ({
   children,
   minHeight,
 }) => {
-  const selector = useSelector(state => state);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const {bgColor, tintColor} = constants();
   return (
-    // <TouchableWithoutFeedback onPress={onClose}>
-      <Modal
-        // animated
-        animationType="fade"
-        visible={visible}
-        transparent
-        onRequestClose={onClose}>
-        {/* <TouchableWithoutFeedback onPress={onClose}> */}
-          <View style={styles.overlay}>
-            <Animated.View style={styles.container(minHeight, bgColor)}>
-              <View style={styles.viewWrapp}>
-                <TouchableOpacity
-                  style={styles.closeButton(tintColor)}
-                  onPress={onClose}
-                />
-              </View>
-              {children}
-            </Animated.View>
+    <Modal
+      // animated
+      // animationType="fade"
+      visible={visible}
+      transparent
+      onRequestClose={onClose}>
+      <TouchableHighlight
+        onPress={onClose}
+        style={{flex: 1, backgroundColor: 'rgba(0,0,0,0)'}}>
+        <View />
+      </TouchableHighlight>
+      <View style={styles.overlay}>
+        <Animated.View style={styles.container(minHeight, bgColor)}>
+          <View style={styles.viewWrapp}>
+            <TouchableOpacity
+              style={styles.closeButton(tintColor)}
+              onPress={onClose}
+            />
           </View>
-        {/* </TouchableWithoutFeedback> */}
-      </Modal>
-    // </TouchableWithoutFeedback>
+          {children}
+        </Animated.View>
+      </View>
+    </Modal>
   );
 };
 

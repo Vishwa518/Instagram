@@ -19,6 +19,7 @@ import SmallButton from '../../instaComponents/Button/SmallButton';
 import BottomModal from '../../instaComponents/Modal/BottomModal';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 import ImageCardScreen from '../../screens/ImageCardScreen';
+import ProfileInfo from '../../screens/ProfileInfo';
 import {savePostToStore} from '../AccountScreen/accountScreen.action';
 
 const dropDownList = [
@@ -335,24 +336,11 @@ const PostCardItems = ({bgColor, tintColor, showDropDown}) => {
             </View>
           </>
         )}
-        <View style={styles.shareModalView2}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FastImage
-              source={item.profileImage}
-              style={styles.shareModalImage3}
-            />
-            <Text style={styles.shareModalText2(tintColor)}>
-              {item.accountName}
-            </Text>
-          </View>
-          <SmallButton
-            onPress={() => setIsShaePressed(false)}
-            text="Send"
-            newStyle={styles.shareModalButton}
-            backgroundColor={'#007FFF'}
-            tintColor={tintColor}
-          />
-        </View>
+        <ProfileInfo
+          item={item}
+          buttonName={'Send'}
+          onPress={() => setIsShaePressed(false)}
+        />
       </>
     );
   };

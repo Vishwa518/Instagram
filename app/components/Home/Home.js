@@ -1,17 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import { constants } from '../../constants/constants';
 import Header from './Header';
 import PostCardItems from './PostCardItems';
 import StoryScreen from './StoryScreen';
 
 const Home = () => {
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const [showDropDown, setShowDropDown] = useState(false);
   const navigation = useNavigation();
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   return (
     <SafeAreaView style={styles.container(bgColor)}>

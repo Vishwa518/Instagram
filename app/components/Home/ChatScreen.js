@@ -3,16 +3,13 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  TouchableOpacity,
   View,
   Text,
   Platform,
   KeyboardAvoidingView,
-  Image,
-  Pressable,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
+import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
 import HeaderComponent from '../../instaComponents/Header/Header';
@@ -25,11 +22,9 @@ import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 
 const ChatScreen = ({route}) => {
   const {accountName, profileImage} = route.params.item;
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const [value, setValue] = useState('');
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   const ProfileDetail = () => {
     return (
@@ -90,7 +85,7 @@ const ChatScreen = ({route}) => {
       />
       <KeyboardAvoidingView
         style={styles.KeyboardAvoidingViewStyle}
-        behavior="position"
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 5 : 0}>
         <CussomTextInput
           image={Images.post3}
@@ -102,6 +97,7 @@ const ChatScreen = ({route}) => {
           RightButton={() => <RightButton />}
           searchIconStyle={styles.searchIcon}
           newInputStyle={styles.textInputStyle}
+          viewWrapperStyle={styles.viewWrapperStyle(tintColor)}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -157,5 +153,14 @@ const styles = StyleSheet.create({
     height: 50,
     width: '55%',
   },
+  viewWrapperStyle: tintColor => ({
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: tintColor === '#fff' ? '#343434' : '#fff',
+    marginHorizontal: 10,
+    borderRadius: 5,
+    borderWidth: tintColor === '#fff' ? 0 : 1,
+    height: 45,
+  }),
 });
 export default ChatScreen;

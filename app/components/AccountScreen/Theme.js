@@ -10,7 +10,7 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import HeaderComponent from '../../instaComponents/Header/Header';
 import {
   BackIcon,
@@ -18,6 +18,7 @@ import {
 } from '../../instaComponents/Header/HeaderComponents';
 import {Images} from '../../constants/Images';
 import {changeBgColor, changeTintColor} from '../../actions';
+import { constants } from '../../constants/constants';
 
 const data = [
   {
@@ -34,12 +35,10 @@ const data = [
   },
 ];
 const Theme = () => {
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [value, setValue] = useState(2);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   useEffect(() => {
     if (value === 3) {

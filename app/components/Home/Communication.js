@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
+import { constants } from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import HeaderComponent from '../../instaComponents/Header/Header';
 import {
@@ -89,12 +89,10 @@ const data = [
 ];
 
 const Communication = () => {
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState(1);
   const [value, setValue] = useState('');
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   const renderItem = ({item}) => {
     return (

@@ -8,13 +8,11 @@ import {
   TouchableOpacity,
   View,
   Pressable,
-  ScrollView,
   FlatList,
   Platform,
   ActivityIndicator,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
 import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
@@ -119,9 +117,7 @@ const profileDataList = [
 const AccountScreen = () => {
   const numColumns = 3;
   const navigation = useNavigation();
-  const selector = useSelector(state => state);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const {bgColor, tintColor} = constants();
   const [selectedTab, setSelectedTab] = useState(1);
   const [burgerMenuPressed, setBurgerMenuPressed] = useState(false);
   const [profileTextPressed, setProfileTextPressed] = useState(false);
@@ -239,6 +235,8 @@ const AccountScreen = () => {
         tintColor={tintColor}
         userName={'Vishwa S'}
         comments={'Comments'}
+        pressable1={() => navigation.navigate('FollowAndFallowing', {tab: 1})}
+        pressable2={() => navigation.navigate('FollowAndFallowing', {tab: 2})}
       />
       <View style={styles.editButtonView}>
         <SmallButton

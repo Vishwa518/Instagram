@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   Image,
-  FlatList,
-  TouchableOpacity,
   Text,
   StyleSheet,
   View,
@@ -12,7 +10,6 @@ import {
   Pressable,
   Platform,
 } from 'react-native';
-import {useSelector} from 'react-redux';
 import {Images} from '../../constants/Images';
 import HeaderComponent from '../../instaComponents/Header/Header';
 import {
@@ -20,6 +17,7 @@ import {
   TitleView,
 } from '../../instaComponents/Header/HeaderComponents';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
+import { constants } from '../../constants/constants';
 
 const data = [
   {
@@ -69,11 +67,9 @@ const data = [
   },
 ];
 const SettingScreen = () => {
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const [value, setValue] = useState('');
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   const renderItem = item => {
     return (

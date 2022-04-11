@@ -9,7 +9,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useSelector} from 'react-redux';
 import SettingScreen from './app/components/AccountScreen/SettingScreen';
 import Theme from './app/components/AccountScreen/Theme';
 import UserProfileScreen from './app/components/AccountScreen/UserProfileScreen';
@@ -21,13 +20,13 @@ import BottomTabNavigation from './app/navigation/BottomTabNavigation';
 import Login from './app/components/Login';
 import SavedPosts from './app/components/AccountScreen/SavedPosts';
 import AllPosts from './app/components/AccountScreen/AllPosts';
+import FollowAndFallowing from './app/screens/FollowAndFallowing';
+import { constants } from './app/constants/constants';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  const selector = useSelector(state => state);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const {bgColor, tintColor} = constants();
 
   return (
     <NavigationContainer>
@@ -48,6 +47,10 @@ const App = () => {
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="SavedPosts" component={SavedPosts} />
         <Stack.Screen name="AllPosts" component={AllPosts} />
+        <Stack.Screen
+          name="FollowAndFallowing"
+          component={FollowAndFallowing}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

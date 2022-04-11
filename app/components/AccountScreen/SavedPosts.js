@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Text, StyleSheet, SafeAreaView, Pressable} from 'react-native';
 import {useSelector} from 'react-redux';
+import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
 import HeaderComponent from '../../instaComponents/Header/Header';
@@ -11,11 +12,10 @@ import {
 } from '../../instaComponents/Header/HeaderComponents';
 
 const SavedPosts = () => {
+  const navigation = useNavigation();
   const selector = useSelector(state => state);
   const savedPosts = selector.savedPosts.savedPosts;
-  const navigation = useNavigation();
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const {bgColor, tintColor} = constants();
 
   const Postitem = ({item, index}) => {
     return (

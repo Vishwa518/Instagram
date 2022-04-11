@@ -18,6 +18,8 @@ const ProfileComponet = ({
   avatar,
   userName,
   comments,
+  pressable1,
+  pressable2,
 }) => {
   return (
     <View>
@@ -26,7 +28,7 @@ const ProfileComponet = ({
           <Image
             source={avatar}
             style={styles.profileIcon}
-            resizeMode={'stretch'}
+            // resizeMode={'stretch'}
           />
         </TouchableOpacity>
         <View style={styles.tetWrapper}>
@@ -34,11 +36,11 @@ const ProfileComponet = ({
             <Text style={styles.commonText(tintColor)}>{noOfPost}</Text>
             <Text style={styles.commonText(tintColor)}>Post</Text>
           </Pressable>
-          <Pressable style={styles.pressableText}>
+          <Pressable style={styles.pressableText} onPress={pressable1}>
             <Text style={styles.commonText(tintColor)}>{noOfFollowers}</Text>
             <Text style={styles.commonText(tintColor)}>Followers</Text>
           </Pressable>
-          <Pressable style={styles.pressableText}>
+          <Pressable style={styles.pressableText} onPress={pressable2}>
             <Text style={styles.commonText(tintColor)}>{noOfFollowing}</Text>
             <Text style={styles.commonText(tintColor)}>Following</Text>
           </Pressable>
@@ -84,6 +86,8 @@ ProfileComponet.propTypes = {
   avatar: PropTypes.any,
   userName: PropTypes.string,
   comments: PropTypes.string,
+  pressable1: PropTypes.func,
+  pressable2: PropTypes.func,
 };
 
 ProfileComponet.defaultProps = {
@@ -94,4 +98,6 @@ ProfileComponet.defaultProps = {
   avatar: null,
   userName: null,
   comments: null,
+  pressable1: null,
+  pressable2: null,
 };

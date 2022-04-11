@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
 import HeaderComponent from '../../instaComponents/Header/Header';
@@ -19,11 +19,9 @@ import {
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 
 const CommentScreen = () => {
-  const selector = useSelector(state => state);
+  const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const [value, setValue] = useState('');
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
 
   const RightButton = () => {
     return (
@@ -56,7 +54,7 @@ const CommentScreen = () => {
       />
       <KeyboardAvoidingView
         style={styles.KeyboardAvoidingViewStyle}
-        behavior="position"
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 5 : 0}>
         <CussomTextInput
           image={Images.post1}
@@ -67,6 +65,7 @@ const CommentScreen = () => {
           isRightButton
           RightButton={() => <RightButton />}
           searchIconStyle={styles.searchIcon}
+          viewWrapperStyle={styles.viewWrapperStyle(tintColor)}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -88,11 +87,21 @@ const styles = StyleSheet.create({
     tintColor: '#fff',
   },
   KeyboardAvoidingViewStyle: {position: 'absolute', bottom: 10, width: '100%'},
-  rightButton: {position: 'absolute', right: 10, top: 10},
+  rightButton: {position: 'absolute', right: 10, top: 12},
   rightButtonText: {
     color: '#007FFF',
     fontSize: 14,
     letterSpacing: 0.3,
     fontWeight: '500',
   },
+  viewWrapperStyle: tintColor => ({
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: tintColor === '#fff' ? '#343434' : '#fff',
+    marginHorizontal: 10,
+    borderRadius: 5,
+    borderWidth: tintColor === '#fff' ? 0 : 1,
+    bottom: 10,
+    height: 45,
+  }),
 });

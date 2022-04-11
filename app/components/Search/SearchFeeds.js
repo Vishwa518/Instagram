@@ -1,18 +1,16 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View, ImageBackground} from 'react-native';
 import {SectionGrid} from 'react-native-super-grid';
-import {useSelector} from 'react-redux';
+import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import HeaderComponent from '../../instaComponents/Header/Header';
 import {BackIcon} from '../../instaComponents/Header/HeaderComponents';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 
 const SearchFeeds = () => {
-  const navigation = useNavigation()
-  const selector = useSelector(state => state);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const navigation = useNavigation();
+  const {bgColor, tintColor} = constants();
   const [value, setValue] = useState('');
   const [items, setItems] = useState([
     {

@@ -7,7 +7,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {constants} from '../../constants/constants';
 
 const CussomTextInput = ({
   image,
@@ -20,13 +20,11 @@ const CussomTextInput = ({
   viewWrapperStyle,
   searchIconStyle,
   newInputStyle,
-  placeholderTextColor = tintColor,
+  placeholderTextColor,
   isSecureTextEntry = false,
-  PasswordShowAndHide
+  PasswordShowAndHide,
 }) => {
-  const selector = useSelector(state => state);
-  bgColor = selector.color.color;
-  tintColor = selector.color.tintColor;
+  const {bgColor, tintColor} = constants();
 
   return (
     <View style={[styles.ViewWrapper(tintColor), viewWrapperStyle]}>
@@ -41,7 +39,7 @@ const CussomTextInput = ({
         autoCorrect={false}
         onChangeText={text => handleChange(text)}
         placeholder={placeholder}
-        placeholderTextColor={placeholderTextColor}
+        placeholderTextColor={placeholderTextColor || tintColor}
         style={[styles.textInputStyle(tintColor), newInputStyle]}
         autoFocus={autoFocus}
         secureTextEntry={isSecureTextEntry}
