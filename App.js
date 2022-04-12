@@ -22,6 +22,7 @@ import SavedPosts from './app/components/AccountScreen/SavedPosts';
 import AllPosts from './app/components/AccountScreen/AllPosts';
 import FollowAndFallowing from './app/screens/FollowAndFallowing';
 import { constants } from './app/constants/constants';
+import YourActivity from './app/components/AccountScreen/YourActivity';
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,7 @@ const App = () => {
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="SavedPosts" component={SavedPosts} />
         <Stack.Screen name="AllPosts" component={AllPosts} />
+        <Stack.Screen name="YourActivity" component={YourActivity} />
         <Stack.Screen
           name="FollowAndFallowing"
           component={FollowAndFallowing}

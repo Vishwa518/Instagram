@@ -134,6 +134,8 @@ const AccountScreen = () => {
     setBurgerMenuPressed(false);
     if (id === 1) {
       navigation.navigate('SettingScreen');
+    } else if (id === 3) {
+      navigation.navigate('YourActivity');
     } else if (id === 5) {
       navigation.navigate('SavedPosts');
     }

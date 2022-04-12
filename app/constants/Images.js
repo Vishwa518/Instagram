@@ -57,4 +57,6 @@ export const Images = {
   sticker: require('../assets/sticker.png'),
   gallery: require('../assets/gallery.png'),
   mic: require('../assets/mic.png'),
+  filter: require('../assets/filter.png'),
+  next: require('../assets/next.png'),
 };
