@@ -12,7 +12,7 @@ import {
   Text,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { constants } from '../../constants/constants';
+import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
 import SmallButton from '../../instaComponents/Button/SmallButton';
@@ -144,8 +144,20 @@ const UserProfileScreen = ({route}) => {
         noOfFollowers={214}
         noOfFollowing={284}
         tintColor={tintColor}
-        userName={'Vishwa S'}
+        userName={accountName}
         comments={'Comments'}
+        pressable1={() =>
+          navigation.navigate('FollowAndFallowing', {
+            tab: 1,
+            accountName: accountName,
+          })
+        }
+        pressable2={() =>
+          navigation.navigate('FollowAndFallowing', {
+            tab: 2,
+            accountName: accountName,
+          })
+        }
       />
       <View style={styles.buttonView}>
         <SmallButton

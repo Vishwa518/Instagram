@@ -1,12 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
+  FlatList,
   StyleSheet,
   TouchableOpacity,
   Text,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
+  View,
 } from 'react-native';
 import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
@@ -22,12 +24,36 @@ const CommentScreen = () => {
   const {bgColor, tintColor} = constants();
   const navigation = useNavigation();
   const [value, setValue] = useState('');
+  const [msgArray, setMsgArray] = useState([]);
+
+  const handleSendMessage = () => {
+    if (value !== '') {
+      const msg = {
+        id: msgArray.length + 1,
+        message: value,
+      };
+      setMsgArray([...msgArray, msg]);
+      setValue('');
+    }
+  };
 
   const RightButton = () => {
     return (
-      <TouchableOpacity style={styles.rightButton}>
+      <TouchableOpacity
+        style={styles.rightButton}
+        onPress={() => handleSendMessage()}>
         <Text style={styles.rightButtonText}>Post</Text>
       </TouchableOpacity>
+    );
+  };
+
+  const renderMessagePreView = ({item, index}) => {
+    return (
+      <View key={index} style={styles.singleMessageStyle}>
+        <Text style={{color: tintColor, letterSpacing: 0.3}}>
+          {item.message}
+        </Text>
+      </View>
     );
   };
   return (
@@ -52,6 +78,19 @@ const CommentScreen = () => {
           />
         )}
       />
+      {msgArray.length > 0 && (
+        <View>
+          <Text style={styles.dateText(tintColor)}>
+            {new Date().toDateString()}
+          </Text>
+          <FlatList
+            data={msgArray}
+            renderItem={renderMessagePreView}
+            keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      )}
       <KeyboardAvoidingView
         style={styles.KeyboardAvoidingViewStyle}
         behavior={Platform.OS === 'ios' ? 'position' : 'height'}
@@ -86,7 +125,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     tintColor: '#fff',
   },
-  KeyboardAvoidingViewStyle: {position: 'absolute', bottom: 10, width: '100%'},
+  KeyboardAvoidingViewStyle: {
+    position: 'absolute',
+    bottom: 10,
+    width: '100%',
+  },
   rightButton: {position: 'absolute', right: 10, top: 12},
   rightButtonText: {
     color: '#007FFF',
@@ -104,4 +147,18 @@ const styles = StyleSheet.create({
     bottom: 10,
     height: 45,
   }),
+  dateText: tintColor => ({
+    textAlign: 'center',
+    color: tintColor,
+    marginVertical: 5,
+  }),
+  singleMessageStyle: {
+    backgroundColor: '#0078fe',
+    padding: 10,
+    marginTop: 6,
+    marginRight: '4%',
+    maxWidth: '80%',
+    alignSelf: 'flex-end',
+    borderRadius: 25,
+  },
 });

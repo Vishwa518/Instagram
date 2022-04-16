@@ -29,7 +29,7 @@ const BottomModal = ({
       onRequestClose={onClose}>
       <TouchableHighlight
         onPress={onClose}
-        style={{flex: 1, backgroundColor: 'rgba(0,0,0,0)'}}>
+        style={{flex: 1, backgroundColor: 'rgba(46, 46, 46, 0.3)'}}>
         <View />
       </TouchableHighlight>
       <View style={styles.overlay}>

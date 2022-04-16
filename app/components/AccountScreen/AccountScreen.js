@@ -237,8 +237,18 @@ const AccountScreen = () => {
         tintColor={tintColor}
         userName={'Vishwa S'}
         comments={'Comments'}
-        pressable1={() => navigation.navigate('FollowAndFallowing', {tab: 1})}
-        pressable2={() => navigation.navigate('FollowAndFallowing', {tab: 2})}
+        pressable1={() =>
+          navigation.navigate('FollowAndFallowing', {
+            tab: 1,
+            accountName: 'Vishwa S',
+          })
+        }
+        pressable2={() =>
+          navigation.navigate('FollowAndFallowing', {
+            tab: 2,
+            accountName: 'Vishwa S',
+          })
+        }
       />
       <View style={styles.editButtonView}>
         <SmallButton

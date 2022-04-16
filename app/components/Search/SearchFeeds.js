@@ -76,8 +76,8 @@ const SearchFeeds = () => {
   ]);
   return (
     <SafeAreaView style={styles.container(bgColor)}>
-      <View style={styles.viewWrapperStyle}>
-        <BackIcon nav={() => navigation.goBack()} color={tintColor} />
+      {/* <View style={styles.viewWrapperStyle}> */}
+        {/* <BackIcon nav={() => navigation.goBack()} color={tintColor} /> */}
         <CussomTextInput
           image={Images.search}
           value={value}
@@ -85,7 +85,7 @@ const SearchFeeds = () => {
           placeholder={'Search'}
           viewWrapperStyle={styles.ViewWrapper(tintColor)}
         />
-      </View>
+      {/* </View> */}
       <SectionGrid
         itemDimension={90}
         showsVerticalScrollIndicator={false}
@@ -129,12 +129,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: tintColor === '#fff' ? '#343434' : '#fff',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     borderRadius: 6,
     borderWidth: 1,
     borderColor: tintColor,
     marginTop: 3,
-    width: '80%',
+    // width: '80%',
   }),
   gridView: {
     marginTop: 10,

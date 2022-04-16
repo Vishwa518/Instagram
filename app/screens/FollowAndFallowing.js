@@ -109,7 +109,7 @@ const sortOrderList = [
 ];
 
 const FollowAndFallowing = ({route}) => {
-  const {tab} = route.params;
+  const {tab, accountName} = route.params;
   const navigation = useNavigation();
   const {bgColor, tintColor} = constants();
   const [value, setValue] = useState('');
@@ -209,7 +209,7 @@ const FollowAndFallowing = ({route}) => {
         )}
         Center={() => (
           <TitleView
-            title={'vishwa_b_s'}
+            title={accountName}
             color={tintColor}
             NewStyle={{textAlign: 'left'}}
           />
