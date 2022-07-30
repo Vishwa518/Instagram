@@ -23,6 +23,9 @@ import AllPosts from './app/components/AccountScreen/AllPosts';
 import FollowAndFallowing from './app/screens/FollowAndFallowing';
 import { constants } from './app/constants/constants';
 import YourActivity from './app/components/AccountScreen/YourActivity';
+import QrCodeScreen from './app/components/AccountScreen/QrCodeScreen';
+import SearchScreen from './app/components/Search/SearchScreen';
+import Archive from './app/components/AccountScreen/Archive';
 
 const Stack = createStackNavigator();
 
@@ -53,6 +56,9 @@ const App = () => {
           name="FollowAndFallowing"
           component={FollowAndFallowing}
         />
+        <Stack.Screen name="QrCodeScreen" component={QrCodeScreen} />
+        <Stack.Screen name="SearchScreen" component={SearchScreen} />
+        <Stack.Screen name="Archive" component={Archive} />
       </Stack.Navigator>
     </NavigationContainer>
   );

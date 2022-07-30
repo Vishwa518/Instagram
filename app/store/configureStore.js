@@ -4,6 +4,6 @@ import {changeBgReducer} from '../reducer';
 
 const rootReducer = combineReducers({
   color: changeBgReducer,
-  savedPosts: updateAccountInfo,
+  userAccountInfo: updateAccountInfo,
 });
 export default rootReducer;

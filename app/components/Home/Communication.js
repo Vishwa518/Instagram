@@ -38,7 +38,7 @@ const headerTabData = [
 const data = [
   {
     id: 1,
-    accountName: 'vishwa_b_s',
+    accountName: 'Test User-0',
     profileImage: Images.post1,
   },
   {

@@ -1,12 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View, ImageBackground} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
+  Text,
+} from 'react-native';
 import {SectionGrid} from 'react-native-super-grid';
 import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
-import HeaderComponent from '../../instaComponents/Header/Header';
-import {BackIcon} from '../../instaComponents/Header/HeaderComponents';
-import CussomTextInput from '../../instaComponents/TextInput/TextInput';
 
 const SearchFeeds = () => {
   const navigation = useNavigation();
@@ -76,16 +79,11 @@ const SearchFeeds = () => {
   ]);
   return (
     <SafeAreaView style={styles.container(bgColor)}>
-      {/* <View style={styles.viewWrapperStyle}> */}
-        {/* <BackIcon nav={() => navigation.goBack()} color={tintColor} /> */}
-        <CussomTextInput
-          image={Images.search}
-          value={value}
-          handleChange={text => setValue(text)}
-          placeholder={'Search'}
-          viewWrapperStyle={styles.ViewWrapper(tintColor)}
-        />
-      {/* </View> */}
+      <Pressable
+        onPress={() => navigation.navigate('SearchScreen')}
+        style={styles.ViewWrapper(tintColor)}>
+        <Text style={styles.textStyle(tintColor)}>Search</Text>
+      </Pressable>
       <SectionGrid
         itemDimension={90}
         showsVerticalScrollIndicator={false}
@@ -130,11 +128,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: tintColor === '#fff' ? '#343434' : '#fff',
     marginHorizontal: 10,
-    borderRadius: 6,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: tintColor,
-    marginTop: 3,
-    // width: '80%',
+    marginTop: 6,
+    height: 40,
+  }),
+  textStyle: tintColor => ({
+    fontSize: 16,
+    color: tintColor,
+    marginLeft: 10,
+    letterSpacing: 0.3,
   }),
   gridView: {
     marginTop: 10,

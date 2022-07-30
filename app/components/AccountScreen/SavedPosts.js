@@ -1,6 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Text, StyleSheet, SafeAreaView, Pressable} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+  View,
+  Image,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
@@ -14,7 +21,7 @@ import {
 const SavedPosts = () => {
   const navigation = useNavigation();
   const selector = useSelector(state => state);
-  const savedPosts = selector.savedPosts.savedPosts;
+  const savedPosts = selector.userAccountInfo.savedPosts;
   const {bgColor, tintColor} = constants();
 
   const Postitem = ({item, index}) => {
@@ -39,7 +46,7 @@ const SavedPosts = () => {
           <TitleView
             title={'Saved'}
             color={tintColor}
-            NewStyle={{textAlign: 'left'}}
+            NewStyle={{textAlign: 'center', marginLeft: 10}}
           />
         )}
         Right={() => (
@@ -51,21 +58,30 @@ const SavedPosts = () => {
           />
         )}
       />
-      <Pressable
-        style={styles.pressableWrapper}
-        onPress={() =>
-          navigation.navigate('AllPosts', {
-            savedPosts,
-            bgColor,
-            tintColor,
-            navigation,
-          })
-        }>
-        {savedPosts.map(
-          (item, index) => index < 4 && <Postitem item={item} index={index} />,
-        )}
-      </Pressable>
-      <Text style={styles.textStyle(tintColor)}>All Post</Text>
+      {savedPosts.length > 0 ? (
+        <View>
+          <Pressable
+            style={styles.pressableWrapper}
+            onPress={() =>
+              navigation.navigate('AllPosts', {
+                savedPosts,
+                bgColor,
+                tintColor,
+                navigation,
+              })
+            }>
+            {savedPosts.map(
+              (item, index) =>
+                index < 4 && <Postitem item={item} index={index} />,
+            )}
+          </Pressable>
+          <Text style={styles.textStyle(tintColor)}>All Post</Text>
+        </View>
+      ) : (
+        <View style={styles.emptyView}>
+          <Text style={styles.emptyText(tintColor)}>No saved items</Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -103,6 +119,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     fontWeight: '500',
     marginTop: 10,
+  }),
+  emptyView: {
+    alignItems: 'center',
+    marginTop: '90%',
+  },
+  emptyText: tintColor => ({
+    fontSize: 20,
+    letterSpacing: 0.3,
+    color: tintColor,
   }),
 });
 export default SavedPosts;

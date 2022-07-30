@@ -1,1 +1,3 @@
 export const SAVE_POST = 'SAVE_POST';
+
+export const EDIT_PROFILE_DETAILS = 'EDIT_PROFILE_DETAILS'

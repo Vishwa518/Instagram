@@ -17,7 +17,7 @@ import {
   TitleView,
 } from '../../instaComponents/Header/HeaderComponents';
 import CussomTextInput from '../../instaComponents/TextInput/TextInput';
-import { constants } from '../../constants/constants';
+import {constants} from '../../constants/constants';
 
 const data = [
   {

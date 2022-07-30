@@ -96,7 +96,7 @@ const CommentScreen = () => {
         behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 5 : 0}>
         <CussomTextInput
-          image={Images.post1}
+          image={Images.post3}
           value={value}
           handleChange={text => setValue(text)}
           placeholder={'Add a comment...'}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: 5,
     borderRadius: 15,
-    tintColor: '#fff',
+    tintColor: null,
   },
   KeyboardAvoidingViewStyle: {
     position: 'absolute',

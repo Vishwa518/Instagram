@@ -156,7 +156,7 @@ const FollowAndFallowing = ({route}) => {
             </Text>
             <Pressable onPress={() => setIsSortClicked(true)}>
               <Image
-                source={Images.heart}
+                source={Images.filter}
                 style={{width: 24, height: 24, tintColor, right: 10}}
               />
             </Pressable>
@@ -211,7 +211,7 @@ const FollowAndFallowing = ({route}) => {
           <TitleView
             title={accountName}
             color={tintColor}
-            NewStyle={{textAlign: 'left'}}
+            NewStyle={{textAlign: 'center'}}
           />
         )}
         NewStyle={{marginHorizontal: 10}}

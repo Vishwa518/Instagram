@@ -10,15 +10,17 @@ import {
   Pressable,
   FlatList,
   Platform,
-  ActivityIndicator,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {useSelector} from 'react-redux';
 import {constants} from '../../constants/constants';
 import {Images} from '../../constants/Images';
 import IconButton from '../../instaComponents/Button/IconButton';
 import SmallButton from '../../instaComponents/Button/SmallButton';
 import ProfileComponet from '../../instaComponents/Header/ProfileComponet';
+import Spinner from '../../instaComponents/Loader';
 import BottomModal from '../../instaComponents/Modal/BottomModal';
+import EditProfile from './EditProfile';
 
 const data = [
   {
@@ -106,7 +108,7 @@ const profileDataList = [
   {
     id: 1,
     name: 'vishwa_b_s',
-    image: Images.post4,
+    image: Images.post3,
   },
   {
     id: 2,
@@ -116,6 +118,8 @@ const profileDataList = [
 ];
 const AccountScreen = () => {
   const numColumns = 3;
+  const selector = useSelector(state => state);
+  const profileInfo = selector.userAccountInfo.profileInfo;
   const navigation = useNavigation();
   const {bgColor, tintColor} = constants();
   const [selectedTab, setSelectedTab] = useState(1);
@@ -123,6 +127,7 @@ const AccountScreen = () => {
   const [profileTextPressed, setProfileTextPressed] = useState(false);
   const [createStory, setCreateStory] = useState(false);
   const [datas, setDatas] = useState([]);
+  const [isEditProfileClicked, setIsEditProfileClicked] = useState(false);
 
   useEffect(() => {
     fetch('https://picsum.photos/v2/list')
@@ -134,8 +139,12 @@ const AccountScreen = () => {
     setBurgerMenuPressed(false);
     if (id === 1) {
       navigation.navigate('SettingScreen');
+    } else if (id === 2) {
+      navigation.navigate('Archive');
     } else if (id === 3) {
       navigation.navigate('YourActivity');
+    } else if (id === 4) {
+      navigation.navigate('QrCodeScreen');
     } else if (id === 5) {
       navigation.navigate('SavedPosts');
     }
@@ -210,7 +219,9 @@ const AccountScreen = () => {
             source={Images.lockIcon}
             style={[styles.headerImage(tintColor), {marginRight: 5}]}
           />
-          <Text style={styles.headerText(tintColor)}>vishwa_b_s</Text>
+          <Text style={styles.headerText(tintColor)}>
+            {profileInfo.userName}
+          </Text>
           <Image
             source={Images.downArrow}
             style={[styles.headerImage(tintColor), {marginLeft: 5}]}
@@ -230,23 +241,23 @@ const AccountScreen = () => {
         </View>
       </View>
       <ProfileComponet
-        avatar={Images.post3}
-        noOfPost={1}
+        avatar={profileInfo.profileImage}
+        noOfPost={30}
         noOfFollowers={214}
         noOfFollowing={284}
         tintColor={tintColor}
-        userName={'Vishwa S'}
-        comments={'Comments'}
+        userName={profileInfo.name}
+        comments={profileInfo.aboutInfo}
         pressable1={() =>
           navigation.navigate('FollowAndFallowing', {
             tab: 1,
-            accountName: 'Vishwa S',
+            accountName: profileInfo.name,
           })
         }
         pressable2={() =>
           navigation.navigate('FollowAndFallowing', {
             tab: 2,
-            accountName: 'Vishwa S',
+            accountName: profileInfo.name,
           })
         }
       />
@@ -255,6 +266,7 @@ const AccountScreen = () => {
           text="Edit Profile"
           newStyle={{borderWidth: 1, width: '87%', height: 40}}
           tintColor={tintColor}
+          onPress={() => setIsEditProfileClicked(true)}
         />
         <SmallButton
           image={Images.addUserIcon}
@@ -273,7 +285,9 @@ const AccountScreen = () => {
       </View>
       {selectedTab === 1 &&
         (data.length === 0 ? (
-          <ActivityIndicator size="large" color={tintColor} />
+          <View style={{marginTop: '50%'}}>
+            <Spinner />
+          </View>
         ) : (
           <FlatList
             data={datas}
@@ -318,6 +332,17 @@ const AccountScreen = () => {
           data={createStoryData}
           renderItem={renderCreateStory}
           keyExtractor={item => item.id}
+        />
+      </BottomModal>
+      <BottomModal
+        visible={isEditProfileClicked}
+        onClose={() => setIsEditProfileClicked(false)}
+        minHeight={'100%'}>
+        <EditProfile
+          profileInfo={profileInfo}
+          setIsEditProfileClicked={setIsEditProfileClicked}
+          bgColor={bgColor}
+          tintColor={tintColor}
         />
       </BottomModal>
     </SafeAreaView>

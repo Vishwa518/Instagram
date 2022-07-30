@@ -59,4 +59,7 @@ export const Images = {
   mic: require('../assets/mic.png'),
   filter: require('../assets/filter.png'),
   next: require('../assets/next.png'),
+  smiles_bg: require('../assets/smiles_smile_yellow.jpeg'),
+  calendar: require('../assets/calendar.png'),
+  location: require('../assets/location.png'),
 };

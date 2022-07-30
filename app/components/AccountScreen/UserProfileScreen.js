@@ -7,7 +7,6 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  ActivityIndicator,
   Pressable,
   Text,
 } from 'react-native';
@@ -22,6 +21,7 @@ import {
   TitleView,
 } from '../../instaComponents/Header/HeaderComponents';
 import ProfileComponet from '../../instaComponents/Header/ProfileComponet';
+import Spinner from '../../instaComponents/Loader';
 import BottomModal from '../../instaComponents/Modal/BottomModal';
 
 const imageList = [
@@ -128,7 +128,13 @@ const UserProfileScreen = ({route}) => {
         Left={() => (
           <BackIcon nav={() => navigation.goBack()} color={tintColor} />
         )}
-        Center={() => <TitleView title={accountName} color={tintColor} />}
+        Center={() => (
+          <TitleView
+            title={accountName}
+            color={tintColor}
+            NewStyle={{textAlign: 'center'}}
+          />
+        )}
         Right={() => (
           <IconButton
             image={Images.vMenuIcon}
@@ -192,7 +198,9 @@ const UserProfileScreen = ({route}) => {
       </View>
       {(selectedTab === 1 || selectedTab === 2) &&
         (data.length === 0 ? (
-          <ActivityIndicator size="large" color={tintColor} />
+          <View style={{marginTop: '50%'}}>
+            <Spinner />
+          </View>
         ) : (
           <FlatList
             data={data}

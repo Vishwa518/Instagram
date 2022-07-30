@@ -36,9 +36,15 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>instaClone app want to access your location. Based on your current location, businesses around you will be shown</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSCameraUsageDescription</key>
+	<string>instaClone app want to access camera to capture photo to use in user profile picture.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>instaClone want to access photo Library for user to select  user profile picture.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>instaClone want to access microphone for user to support dictation.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

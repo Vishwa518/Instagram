@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Image,
   StyleSheet,
   TouchableOpacity,
-  Text,
   TextInput,
 } from 'react-native';
 import {constants} from '../../constants/constants';
+import {Images} from '../../constants/Images';
 
 const CussomTextInput = ({
   image,
@@ -23,8 +23,14 @@ const CussomTextInput = ({
   placeholderTextColor,
   isSecureTextEntry = false,
   PasswordShowAndHide,
+  isRightIcon,
 }) => {
-  const {bgColor, tintColor} = constants();
+  const {tintColor} = constants();
+  const [isRightIcons, setIsRightIcon] = useState(isRightIcon);
+
+  useEffect(() => {
+    setIsRightIcon(isRightIcon);
+  }, [isRightIcon]);
 
   return (
     <View style={[styles.ViewWrapper(tintColor), viewWrapperStyle]}>
@@ -44,6 +50,24 @@ const CussomTextInput = ({
         autoFocus={autoFocus}
         secureTextEntry={isSecureTextEntry}
       />
+      {isRightIcons && (
+        <TouchableOpacity
+          style={{position: 'absolute', right: 10}}
+          onPress={() => {
+            handleChange('');
+            setIsRightIcon(false);
+          }}>
+          <Image
+            style={{
+              width: 16,
+              height: 16,
+              tintColor: '#fff',
+              transform: [{rotate: '45deg'}],
+            }}
+            source={Images.plus1}
+          />
+        </TouchableOpacity>
+      )}
       {isRightButton && <RightButton />}
       {PasswordShowAndHide && <PasswordShowAndHide />}
     </View>

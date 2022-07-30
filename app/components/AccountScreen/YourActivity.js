@@ -87,7 +87,13 @@ const YourActivity = () => {
           Left={() => (
             <BackIcon nav={() => navigation.goBack()} color={tintColor} />
           )}
-          Center={() => <TitleView title={'Your Activity'} color={tintColor} />}
+          Center={() => (
+            <TitleView
+              title={'Your Activity'}
+              color={tintColor}
+              NewStyle={{textAlign: 'center'}}
+            />
+          )}
         />
       </View>
       <View style={styles.viewWrapper}>

@@ -49,7 +49,7 @@ const AllPosts = ({route}) => {
             <TitleView
               title={'All Posts'}
               color={tintColor}
-              NewStyle={{textAlign: 'left'}}
+              NewStyle={{textAlign: 'center'}}
             />
           )}
           Right={() => (
